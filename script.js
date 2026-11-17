@@ -87,6 +87,108 @@ function initLeaderboard(){
  });
  render();
 }
+function initConstructionWalkthrough() {
+ const walkthrough = document.querySelector('[data-construction-walkthrough]');
+ if (!walkthrough) return;
+
+ const controls = walkthrough.querySelector('[data-construction-controls]');
+ const toggle = walkthrough.querySelector('[data-construction-toggle]');
+ const steps = Array.from(controls.querySelectorAll('[data-duration]'), button => {
+  const panel = document.getElementById(button.getAttribute('aria-controls'));
+  return {
+   button,
+   panel,
+   duration: Number(button.dataset.duration),
+   activities: Array.from(panel.querySelectorAll('[data-activity]')),
+   videos: Array.from(panel.querySelectorAll('video')),
+   progress: panel.querySelector('[data-construction-progress]'),
+  };
+ });
+ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+ const hasObserver = 'IntersectionObserver' in window;
+ let enabled = !reducedMotion.matches;
+ let inView = !hasObserver;
+ let index = 0;
+ let elapsed = 0;
+ let previousFrame = null;
+ let frameId = null;
+
+ const canAdvance = () => enabled && inView && !document.hidden;
+
+ function updateMotion() {
+  const { duration, activities, progress } = steps[index];
+  const fraction = Math.min(1, elapsed / duration);
+  const active = Math.min(activities.length - 1, Math.floor(fraction * activities.length));
+  activities.forEach((activity, i) => activity.classList.toggle('is-active', i === active));
+  if (progress) progress.style.setProperty('--progress', fraction);
+ }
+
+ function playFootage() {
+  steps[index].videos.forEach(video => { video.play().catch(() => {}); });
+ }
+
+ function selectStep(next) {
+  const previous = steps[index];
+  previous.videos.forEach(video => video.pause());
+  previous.panel.hidden = true;
+  previous.button.removeAttribute('aria-current');
+
+  index = next;
+  elapsed = 0;
+  previousFrame = null;
+  const selected = steps[index];
+  selected.panel.hidden = false;
+  selected.button.setAttribute('aria-current', 'step');
+  selected.videos.forEach(video => { video.currentTime = 0; });
+  updateMotion();
+  if (canAdvance()) playFootage();
+ }
+
+ function tick(now) {
+  if (previousFrame !== null) elapsed += now - previousFrame;
+  previousFrame = now;
+  if (elapsed >= steps[index].duration) selectStep((index + 1) % steps.length);
+  else updateMotion();
+  frameId = requestAnimationFrame(tick);
+ }
+
+ function updatePlayback() {
+  toggle.textContent = enabled ? 'Pause' : 'Play';
+  toggle.setAttribute('aria-label', enabled ? 'Pause walkthrough' : 'Play walkthrough');
+  if (canAdvance()) {
+   if (frameId !== null) return;
+   frameId = requestAnimationFrame(tick);
+   playFootage();
+  } else {
+   if (frameId !== null) cancelAnimationFrame(frameId);
+   frameId = null;
+   previousFrame = null;
+   steps[index].videos.forEach(video => video.pause());
+  }
+ }
+
+ steps.forEach(({ button }, next) => button.addEventListener('click', () => selectStep(next)));
+ toggle.addEventListener('click', () => {
+  enabled = !enabled;
+  updatePlayback();
+ });
+ document.addEventListener('visibilitychange', updatePlayback);
+ reducedMotion.addEventListener('change', () => {
+  enabled = !reducedMotion.matches;
+  updatePlayback();
+ });
+ if (hasObserver) {
+  const observer = new IntersectionObserver(([entry]) => {
+   inView = entry.isIntersecting;
+   updatePlayback();
+  }, { threshold: 0.1 });
+  observer.observe(walkthrough.querySelector('.construction-panels'));
+ }
+ controls.hidden = false;
+ updateMotion();
+ updatePlayback();
+}
+
 function initExampleMedia(){
  const config=window.SCREENMEM_MEDIA;
  if(!config)return;
@@ -163,4 +265,4 @@ function initExampleMedia(){
 function renderHomeMiniBars(){
  document.querySelectorAll('[data-bar]').forEach(n=>{const v=parseFloat(n.dataset.bar);n.style.width=`${Math.max(1,Math.min(v/35*100,100))}%`;});
 }
-renderChrome();paintIcons();renderHomeMiniBars();initLeaderboard();initExampleMedia();
+renderChrome();paintIcons();renderHomeMiniBars();initLeaderboard();initExampleMedia();initConstructionWalkthrough();

@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#ffffff"><meta name="description" content="ScreenMem benchmarks proactive, query-agnostic memory maintenance across long-horizon PC and mobile computer-use streams.">
   <title>ScreenMem — Proactive Memory Maintenance</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=overview-1"><script src="media-config.js?v=overview-1" defer></script><script src="script.js?v=overview-1" defer></script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=overview-11"><script src="media-config.js?v=overview-9" defer></script><script src="script.js?v=overview-4" defer></script>
 </head>
 <body data-page="overview">
 <div id="site-header"></div>
@@ -82,11 +82,95 @@
       <h2 id="construction-video-heading">From traces to streams.</h2>
       <p>Application reconstruction, interaction replay, and temporal composition.</p>
     </div>
-    <div class="media-stage media-construction" data-media-slot="construction">
-      <div class="media-pending" data-media-pending role="status">
-        <span class="construction-sequence" aria-hidden="true"><span data-icon="document"></span><span data-icon="arrow-right"></span><span data-icon="monitor"></span><span data-icon="arrow-right"></span><span data-icon="layers"></span></span>
-        <h3>Construction walkthrough</h3>
-        <p>A video showing how source traces become reconstructed applications, replayed interactions, and composed streams.</p>
+    <div class="construction-walkthrough" data-construction-walkthrough>
+      <div class="construction-panels">
+        <section class="construction-panel" id="construction-traces" aria-labelledby="construction-traces-title">
+          <h3 id="construction-traces-title"><span class="accent">Trace</span> selection</h3>
+          <p>Ground the stream in real interaction trajectories.</p>
+          <div class="construction-grid">
+            <div class="construction-card">
+              <h4>Source traces</h4>
+              <dl class="construction-list construction-sources">
+                <div><dt>PC</dt><dd>RLKWiC</dd></div>
+                <div><dt>Mobile</dt><dd>FingerTip 20K</dd></div>
+              </dl>
+            </div>
+            <div class="construction-card">
+              <h4>Illustrative action sequence</h4>
+              <ol class="construction-list construction-trace-actions">
+                <li data-activity class="is-active"><time class="construction-time" datetime="PT0S">00:00</time><span>Focus an app window</span></li>
+                <li data-activity><time class="construction-time" datetime="PT1S">00:01</time><span>Select a UI element</span></li>
+                <li data-activity><time class="construction-time" datetime="PT2S">00:02</time><span>Scroll through content</span></li>
+              </ol>
+            </div>
+          </div>
+        </section>
+        <section class="construction-panel" id="construction-reconstruction" aria-labelledby="construction-reconstruction-title" hidden>
+          <h3 id="construction-reconstruction-title">Application <span class="accent">reconstruction</span></h3>
+          <p>Recreate the interaction semantics in virtual apps.</p>
+          <div class="construction-grid construction-device-grid">
+            <figure class="construction-card construction-device">
+              <figcaption><strong>PC</strong><span class="construction-platform">OS.js</span></figcaption>
+              <div class="construction-device-media"><img src="assets/construction-pc.webp" alt="Reconstructed desktop with a messaging window" width="1440" height="900"></div>
+            </figure>
+            <figure class="construction-card construction-device">
+              <figcaption><strong>Mobile</strong><span class="construction-platform">MobileGym-compatible apps</span></figcaption>
+              <div class="construction-device-media"><img src="assets/construction-mobile.webp" alt="Reconstructed mobile app with a search interface" width="720" height="1600"></div>
+            </figure>
+          </div>
+        </section>
+        <section class="construction-panel" id="construction-replay" aria-labelledby="construction-replay-title" hidden>
+          <h3 id="construction-replay-title">Scripted <span class="accent">replay</span></h3>
+          <p>Execute action scripts and record the device display.</p>
+          <div class="construction-grid construction-replay-grid">
+            <div class="construction-grid construction-device-grid">
+              <figure class="construction-card construction-device">
+                <figcaption><strong>PC excerpt</strong></figcaption>
+                <div class="construction-device-media"><video src="assets/construction-pc.mp4" poster="assets/construction-pc.webp" aria-label="Replayed interaction on PC" width="1440" height="900" preload="none" muted playsinline></video></div>
+              </figure>
+              <figure class="construction-card construction-device">
+                <figcaption><strong>Mobile excerpt</strong></figcaption>
+                <div class="construction-device-media"><video src="assets/construction-mobile.mp4" poster="assets/construction-mobile.webp" aria-label="Replayed interaction on mobile" width="720" height="1600" preload="none" muted playsinline></video></div>
+              </figure>
+            </div>
+            <div class="construction-card">
+              <h4>Action script</h4>
+              <ol class="construction-list">
+                <li data-activity class="is-active">Execute action</li>
+                <li data-activity>Update the display</li>
+                <li data-activity>Record frames</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+        <section class="construction-panel" id="construction-composition" aria-labelledby="construction-composition-title" hidden>
+          <h3 id="construction-composition-title">Temporal <span class="accent">composition</span></h3>
+          <p>Place episodes on a user-day timeline with idle intervals.</p>
+          <div class="construction-card">
+            <h4>One reconstructed mobile user day</h4>
+            <div class="construction-strip">
+              <figure><img src="assets/construction-early.webp" alt="Food browsing excerpt" width="720" height="1600"><figcaption>+02:10</figcaption></figure>
+              <figure><img src="assets/construction-mobile.webp" alt="App search excerpt" width="720" height="1600"><figcaption>+07:03</figcaption></figure>
+              <figure><img src="assets/construction-late.webp" alt="Transport search excerpt" width="720" height="1600"><figcaption>+09:27</figcaption></figure>
+            </div>
+            <div class="construction-time-axis" aria-hidden="true">
+              <div class="construction-track">
+                <div class="construction-progress" data-construction-progress></div>
+                <span style="--offset:22%"></span><span style="--offset:71%"></span><span style="--offset:95%"></span>
+              </div>
+              <div><span>Start</span><span>+09:54</span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="construction-controls" data-construction-controls hidden>
+        <div class="construction-chapters" role="group" aria-label="Construction steps">
+          <button type="button" data-duration="4000" aria-controls="construction-traces" aria-current="step">Trace selection</button>
+          <button type="button" data-duration="4000" aria-controls="construction-reconstruction">Application reconstruction</button>
+          <button type="button" data-duration="4500" aria-controls="construction-replay">Replay &amp; recording</button>
+          <button type="button" data-duration="5000" aria-controls="construction-composition">Temporal composition</button>
+        </div>
+        <button class="construction-toggle" type="button" data-construction-toggle>Pause</button>
       </div>
     </div>
   </section>

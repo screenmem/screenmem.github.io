@@ -33,13 +33,13 @@ Visit <http://127.0.0.1:8080/>.
 
 ## Media and the More videos link
 
-The Overview contains three review placeholders:
+The Overview contains two short previews and an interactive walkthrough:
 
-- **PC:** a short interaction excerpt from a reconstructed desktop application.
-- **Mobile:** a short interaction excerpt from a reconstructed mobile application, displayed beside PC.
-- **Construction:** a walkthrough of application reconstruction, interaction replay, and temporal composition.
+- **PC:** four short excerpts from reconstructed desktop applications.
+- **Mobile:** four short excerpts from reconstructed mobile applications, displayed beside PC.
+- **Construction:** a walkthrough of trace selection, application reconstruction, scripted replay, and temporal composition.
 
-The website previews need not contain complete user days. Each placeholder explains its intended content inside the media surface. It disappears once the corresponding media loads.
+The PC and mobile previews each run for about 16 seconds. They show short excerpts from the streams. The construction walkthrough is built into the Overview using HTML, CSS, and JavaScript. Its four steps advance automatically when visible, with buttons to jump to a step or pause. Still images and brief recordings from the reconstructed streams appear at their original aspect ratios.
 
 Configure the sources in `media-config.js`. Paths are relative to `index.html`; direct HTTPS media URLs also work. Use `type: 'video'` for MP4/WebM and `type: 'image'` for GIF/animated WebP. `poster` is optional for videos.
 
@@ -47,29 +47,23 @@ Configure the sources in `media-config.js`. Paths are relative to `index.html`; 
 window.SCREENMEM_MEDIA = {
   pc: {
     type: 'video',
-    src: 'assets/pc-excerpt.mp4',
+    src: 'assets/screenmem-pc-preview.mp4?v=2',
     poster: '',
     label: 'PC interaction example',
   },
   mobile: {
-    type: 'image',
-    src: 'assets/mobile-excerpt.gif',
+    type: 'video',
+    src: 'assets/screenmem-mobile-preview.mp4?v=2',
     poster: '',
     label: 'Mobile interaction example',
-  },
-  construction: {
-    type: 'video',
-    src: 'assets/construction.mp4',
-    poster: '',
-    label: 'Trace-grounded construction of ScreenMem',
   },
   moreVideosUrl: '', // Set to the actual external video collection URL.
 };
 ```
 
-These media filenames are examples, not bundled assets. Empty sources retain the placeholders without requesting missing files. `moreVideosUrl` configures the header, footer, and **View more videos** link on the Overview together. It can point to a dedicated video page or the eventual Hugging Face dataset page. Empty or invalid URLs leave those links disabled and labeled through their accessible descriptions/tooltips.
+Empty sources retain the placeholders without requesting missing files. `moreVideosUrl` configures the header, footer, and **View more videos** link on the Overview together. It can point to a dedicated video page or the eventual Hugging Face dataset page. Empty or invalid URLs leave those links disabled and labeled through their accessible descriptions/tooltips.
 
-Videos play automatically, muted, inline, and on a loop. Playback pauses off-screen and when the page is hidden. A reduced-motion preference pauses autoplay and enables native controls; native controls are also enabled if the browser blocks playback. Media is fitted without cropping.
+Videos play automatically, muted, inline, and on a loop. Playback pauses off-screen and when the page is hidden. A reduced-motion preference pauses autoplay and enables native controls; native controls are also enabled if the browser blocks playback.
 
 ## Leaderboard
 
@@ -99,4 +93,4 @@ Figures and scores are based on the supplied ScreenMem manuscript:
 
 The four capabilities follow the paper: Facts & States, State Evolution, Activities & Transient Events, and Behavioral Patterns. The home illustration and conceptual memory figure are schematic; the construction and memory-formulation figures are cropped from the manuscript.
 
-Public paper/code release links, media assets, the external video collection URL, and author/affiliation information remain to be supplied. The repository contains only website assets, not benchmark recordings or the full manuscript.
+Public paper/code release links, the external video collection URL, and author/affiliation information remain to be supplied. The repository includes the short Overview previews. Full benchmark recordings and the manuscript are not included.
