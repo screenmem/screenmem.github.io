@@ -19,7 +19,7 @@ A static HTML/CSS/JavaScript website with no package installation, build step, b
 └── .gitignore
 ```
 
-The navigation contains Overview, Benchmark, More videos, and Leaderboard. **More videos** points to an external video collection once configured; it is not a separate website page. All local links are relative so the site works under the `/screenmem/` project path.
+The navigation contains Overview, Benchmark, More videos, and Leaderboard. **More videos** points to an external video collection once configured. Relative links work in both the local preview and GitHub Pages.
 
 ## Local preview
 
@@ -71,7 +71,7 @@ The leaderboard contains all 15 memory systems and two optional retrieval-only b
 
 ## GitHub Pages
 
-The intended repository is <https://github.com/screenmem/screenmem>.
+The source repository is <https://github.com/screenmem/screenmem.github.io>.
 
 After pushing the files to `main`, enable Pages in **Settings → Pages**:
 
@@ -80,7 +80,7 @@ After pushing the files to `main`, enable Pages in **Settings → Pages**:
 3. Folder: **/(root)**.
 4. Save.
 
-The expected default project-site URL is <https://screenmem.github.io/screenmem/> once GitHub Pages finishes publishing. No custom workflow is required for this buildless site. Configuration reference: [GitHub Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+GitHub Pages serves the site at <https://screenmem.github.io/>. See [GitHub Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Research content
 

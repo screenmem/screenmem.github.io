@@ -267,6 +267,9 @@ details.research-detail{border:1px solid var(--line);border-radius:12px;padding:
 .lb-context p,.note-panel p{font-size:14px;line-height:1.7;color:var(--muted)}
 .chart-panel .chart-sub{font-size:13px;color:var(--muted);line-height:1.7}
 .figure-frame figcaption{font-size:13px}
+.figure-frame.paper-figure{border:0;padding:0;border-radius:0;background:transparent}
+.paper-figure img{display:block;width:100%;height:auto;border-radius:0}
+.paper-figure figcaption{padding-inline:0}
 .footer-bottom{font-size:12px}
 @media(max-width:1100px){
  .examples-platforms{--media-height:350px;gap:24px}
