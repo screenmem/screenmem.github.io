@@ -39,7 +39,7 @@ The Overview contains two short previews and an interactive walkthrough:
 - **Mobile:** four short excerpts from reconstructed mobile applications, displayed beside PC.
 - **Construction:** a walkthrough of trace selection, application reconstruction, scripted replay, and temporal composition.
 
-The PC and mobile previews each run for about 16 seconds. They show short excerpts from the streams. The construction walkthrough is built into the Overview using HTML, CSS, and JavaScript. Its four steps advance automatically when visible, with buttons to jump to a step or pause. Still images and brief recordings from the reconstructed streams appear at their original aspect ratios.
+The PC preview runs for about 16 seconds and the mobile preview for about 19 seconds. Both show short excerpts at the original recording resolution. The construction walkthrough is built into the Overview using HTML, CSS, and JavaScript. Its four steps advance automatically when visible, with buttons to jump to a step or pause. Still images and brief recordings from the reconstructed streams appear at their original aspect ratios.
 
 Configure the sources in `media-config.js`. Paths are relative to `index.html`; direct HTTPS media URLs also work. Use `type: 'video'` for MP4/WebM and `type: 'image'` for GIF/animated WebP. `poster` is optional for videos.
 
@@ -47,13 +47,13 @@ Configure the sources in `media-config.js`. Paths are relative to `index.html`; 
 window.SCREENMEM_MEDIA = {
   pc: {
     type: 'video',
-    src: 'assets/screenmem-pc-preview.mp4?v=2',
+    src: 'assets/screenmem-pc-preview.mp4?v=3',
     poster: '',
     label: 'PC interaction example',
   },
   mobile: {
     type: 'video',
-    src: 'assets/screenmem-mobile-preview.mp4?v=2',
+    src: 'assets/screenmem-mobile-preview.mp4?v=3',
     poster: '',
     label: 'Mobile interaction example',
   },
