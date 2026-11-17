@@ -1,0 +1,10 @@
+# Local files and packaging outputs
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+__pycache__/
+.env
+.env.*
+work/
+outputs/
